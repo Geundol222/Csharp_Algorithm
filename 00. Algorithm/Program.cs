@@ -79,6 +79,7 @@
         // n = 1000		    1	     1000	1,000,000
         // Big-O		 O(1)	     O(n)	   O(n^2)
 
+        // O(1) > O(logn) > O(n) > O(nlogn) > O(n^2) //(커트라인)// > O(n^3) > O(2^n)
 
         static void Main(string[] args)
         {
