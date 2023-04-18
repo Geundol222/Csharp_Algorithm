@@ -19,6 +19,9 @@ namespace DataStructure
             this.size = 0;
         }
 
+        public int Count { get { return size; } }
+        public int Capacity { get { return items.Length; } }
+
         public T this[int index]
         {
             get
