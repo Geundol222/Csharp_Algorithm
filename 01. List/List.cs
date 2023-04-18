@@ -92,6 +92,31 @@ namespace DataStructure
             return Array.IndexOf(items, item, 0, size);
         }
 
+        public T? Find(Predicate<T> match)      // Predicate : 반환형이 bool인 일반화된 델리게이트
+        {
+            if (match == null)
+                throw new ArgumentNullException("match");
+
+            for (int i = 0; i < size; i++)
+            {
+                if (match(items[i]))
+                    return items[i];
+            }
+
+            return default(T);
+        }
+
+        public int FindIndex(Predicate<T> match)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                if (match(items[i]))
+                    return i;
+            }
+
+            return -1;
+        }
+
         private void Grow()     // List 배열에 Capacity가 다 찼을 경우 새로운 값을 집어넣을 때 호출될 함수
         {
             int newCapacity = items.Length * 2;         // items 길이의 2배만큼의 길이를 생성
