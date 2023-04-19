@@ -23,7 +23,7 @@
             linkedList.AddLast("0번 뒤데이터");
             linkedList.AddLast("1번 뒤데이터");
 
-            // 링크드리스트 요소 삭제
+            // 링크드리스트 요소 삭제 : O(n)
             linkedList.Remove("1번 앞데이터");
 
             // 링크드리스트 요소 탐색
@@ -37,7 +37,7 @@
             linkedList.AddBefore(findNode, "찾은노드 앞데이터");
             linkedList.AddAfter(findNode, "찾은노드 뒤데이터");
 
-            // 링크드리스트 노드를 통한 삭제
+            // 링크드리스트 노드를 통한 삭제 : O(1)
             linkedList.Remove(findNode);
         }
 
