@@ -144,10 +144,11 @@ namespace DataStructure
         public LinkedListNode<T> Find(T value)
         {
             LinkedListNode<T> target = head;
+            EqualityComparer<T> compare = EqualityComparer<T>.Default;
 
             while (target != null)
             {
-                if (target.Value.Equals(value))
+                if (compare.Equals(target.Value, value))
                     return target;
                 else
                     target = target.next;
