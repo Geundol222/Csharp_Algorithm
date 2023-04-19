@@ -19,7 +19,7 @@
          */
 
         // <링크드리스트 사용>
-        void LinkedList()
+        static void LinkedList()
         {
             LinkedList<string> linkedList = new LinkedList<string>();
 
@@ -62,6 +62,8 @@
             linkedList.AddLast(4);
 
             DataStructure.LinkedListNode<int> node = linkedList.Find(2);
+
+            LinkedList();
 
             linkedList.AddAfter(node, 4);
         }

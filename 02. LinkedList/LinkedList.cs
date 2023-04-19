@@ -104,6 +104,56 @@ namespace DataStructure
             return lastNode;
         }
 
+        public LinkedListNode<T> AddAfter(LinkedListNode<T> node, T value)
+        {
+            LinkedListNode<T> newNode = new LinkedListNode<T>(this, value);
+
+            if (node.list != this)
+                throw new InvalidOperationException();
+            if (node == null || newNode == null)
+                throw new ArgumentNullException();
+
+            if (node == tail)
+            {
+                newNode = AddLast(value);
+            }
+            else
+            {                
+                newNode.next = node.next;
+                newNode.prev = node;
+                node.next.prev = newNode;
+                node.next = newNode;
+            }
+            count++;
+
+            return newNode;
+        }
+
+        public LinkedListNode<T> AddBefore(LinkedListNode<T> node, T value)
+        {
+            LinkedListNode<T> newNode = new LinkedListNode<T>(this, value);
+
+            if (node.list != this)
+                throw new InvalidOperationException();
+            if (node == null || newNode == null)
+                throw new ArgumentNullException();
+
+            if (node == head)
+            {
+                newNode = AddFirst(value);
+            }
+            else
+            {                
+                newNode.prev = node.prev;
+                newNode.next = node;
+                node.prev.next = newNode;
+                node.prev = newNode;
+            }
+            count++;
+
+            return newNode;
+        }
+
         public void Remove(LinkedListNode<T> node)
         {
             if (node.list != this)
@@ -157,28 +207,6 @@ namespace DataStructure
             return null;
         }
 
-        public LinkedListNode<T> AddAfter(LinkedListNode<T> node, T value)
-        {
-            LinkedListNode<T> newNode = new LinkedListNode<T>(this, value);
-
-            if (node.list != this)
-                throw new InvalidOperationException();
-            if (node == null || newNode == null)
-                throw new ArgumentNullException();
-
-            if (node.next == null)
-            {
-                newNode = AddLast(value);
-            }
-            else
-            {
-                node.next.prev = newNode;
-                newNode.next = node.next;
-                newNode.prev = node;
-            }
-            count++;
-
-            return newNode;
-        }
+        
     }
 }
