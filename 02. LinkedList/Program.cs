@@ -60,6 +60,10 @@
             linkedList.AddLast(2);
             linkedList.AddLast(3);
             linkedList.AddLast(4);
+
+            DataStructure.LinkedListNode<int> node = linkedList.Find(2);
+
+            linkedList.AddAfter(node, 4);
         }
     }
 }
