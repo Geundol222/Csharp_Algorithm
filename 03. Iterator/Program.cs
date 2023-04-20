@@ -39,7 +39,7 @@
 
             // 반복기 직접조작
             List<string> strings = new List<string>();
-            for (int i = 0; i < 5; i++) strings.Add(string.Format("{0}데이터", i));
+            for (int i = 0; i < 5; i++) strings.Add(string.Format($"{i}데이터"));
 
             IEnumerator<string> iter = strings.GetEnumerator();
             iter.MoveNext();
@@ -51,6 +51,20 @@
             while (iter.MoveNext())
             {
                 Console.WriteLine(iter.Current);
+            }
+        }
+
+        public void Find(IEnumerable<int> container)
+        {
+            IEnumerator<int> iter = container.GetEnumerator();
+
+            iter.Reset();
+            while(iter.MoveNext())
+            {
+                if (iter.Current == 10)
+                {
+                    Console.WriteLine("10을 찾음");
+                }
             }
         }
 
