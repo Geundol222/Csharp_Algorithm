@@ -77,29 +77,13 @@
 
         static void Main(string[] args)
         {
-            //for (int i = 1; i <= 5; i++)
-            //{
-            //    list.Add(i);
-            //    linkedList.AddLast(i);
-            //}
+            Iterator.List<int> list = new Iterator.List<int>();
+            for (int i = 1; i <= 5; i++) list.Add(i);
 
-            //for (int i = 0; i < list.Count; i++)
-            //{
-            //    Console.WriteLine(list[i]);
-            //}
-
-            //LinkedList는 인덱스의 개념이 없으므로 다음과 같이 작성하게 되면 오류 발생
-            //for (int i = 0; i < linkedList.Count; i++)
-            //{
-            //    Console.WriteLine(linkedList[i]);
-            //}
-
-            //LinkedListNode<int> node = linkedList.First;
-            //while (node != null)
-            //{
-            //    Console.WriteLine(node.Value);
-            //    node = node.Next;
-            //}
+            foreach (int i in list)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }

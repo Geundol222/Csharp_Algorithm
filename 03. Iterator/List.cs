@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Iterator
 {
-    internal class List<T>
+    internal class List<T> : IEnumerable<T>
     {
         private const int DefaultCapacity = 10;
 
@@ -123,6 +125,55 @@ namespace Iterator
             T[] newItems = new T[newCapacity];          // newCapacity의 크기를 가지는 newItems 배열 선언
             Array.Copy(items, 0, newItems, 0, size);    // items의 내용들을 newItems배열에 복사한다.
             items = newItems;                           // items를 newItems로 교체하여 힙 영역에서 items를 해제한다
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return new Enumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new Enumerator();
+        }
+
+        public struct Enumerator : IEnumerator<T>
+        {
+            private List<T> list;
+            private int index;
+
+            public T Current { get { return list[index]; } }
+
+            public Enumerator(List<T> list)
+            {
+                this.list = list;
+                this.index = 0;
+            }
+
+            object IEnumerator.Current => throw new NotImplementedException();
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool MoveNext()
+            {
+                if (index < list.Count - 1)
+                {
+                    index++;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }                
+            }
+
+            public void Reset()
+            {
+                index = 0;
+            }
         }
     }
 }
