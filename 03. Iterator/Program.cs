@@ -84,6 +84,17 @@
             {
                 Console.WriteLine(i);
             }
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            IEnumerator<int> iter = list.GetEnumerator();
+            Console.WriteLine(iter.Current);        // output : 0 => 배열의 범위를 넘어선 범위를 출력할 경우 default(int)인 0을 출력하게 된다.
+            while (iter.MoveNext())
+            {
+                Console.WriteLine(iter.Current);    // output : 1, 2, 3, 4, 5
+            }
+            Console.WriteLine(iter.Current);        // output : 0
         }
     }
 }

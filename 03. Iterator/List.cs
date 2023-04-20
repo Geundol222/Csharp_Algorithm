@@ -129,43 +129,45 @@ namespace Iterator
 
         public IEnumerator<T> GetEnumerator()
         {
-            return new Enumerator();
+            return new Enumerator(this);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new Enumerator();
+            return new Enumerator(this);
         }
 
         public struct Enumerator : IEnumerator<T>
         {
             private List<T> list;
             private int index;
+            private T current;
 
-            public T Current { get { return list[index]; } }
+            public T Current { get { return current; } }
 
             public Enumerator(List<T> list)
             {
                 this.list = list;
                 this.index = 0;
+                this.current = default(T);
             }
 
-            object IEnumerator.Current => throw new NotImplementedException();
+            object IEnumerator.Current { get { return current; } }
 
             public void Dispose()
             {
-                throw new NotImplementedException();
             }
 
             public bool MoveNext()
             {
-                if (index < list.Count - 1)
+                if (index < list.Count)
                 {
-                    index++;
+                    current = list[index++];
                     return true;
                 }
                 else
                 {
+                    current = default(T);
                     return false;
                 }                
             }
@@ -173,6 +175,7 @@ namespace Iterator
             public void Reset()
             {
                 index = 0;
+                current = default(T);
             }
         }
     }
