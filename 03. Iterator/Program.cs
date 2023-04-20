@@ -14,6 +14,13 @@
             List<int> list = new List<int>();
             LinkedList<int> linkedList = new LinkedList<int>();
 
+            Stack<int> stack = new Stack<int>();
+            Queue<int> queue = new Queue<int>();
+            SortedList<int, int> sList = new SortedList<int, int>();
+            SortedSet<int> set = new SortedSet<int>();
+            SortedDictionary<int, int> map = new SortedDictionary<int, int>();
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+
             for (int i = 1; i <= 5; i++)
             {
                 list.Add(i);
