@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +44,7 @@ namespace Iterator
         public T Value { get { return item; } set { item = value; } }
     }
 
-    public class LinkedList<T>
+    public class LinkedList<T> : IEnumerable<T>
     {
         private LinkedListNode<T> head;
         private LinkedListNode<T> tail;
@@ -206,6 +207,58 @@ namespace Iterator
             return null;
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            return new Enumerator(this);
+        }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new Enumerator(this);
+        }
+
+        public struct Enumerator : IEnumerator<T>
+        {
+            private LinkedList<T> linkedList;
+            private LinkedListNode<T> node;
+            private T current;
+
+            public Enumerator (LinkedList<T> linkedList)
+            {
+                this.linkedList = linkedList;
+                this.node = linkedList.head;
+                this.current = default(T);
+            }
+
+            public T Current { get { return current; } }
+
+            object IEnumerator.Current { get { return current; } }
+
+            public void Dispose()
+            {
+                
+            }
+
+            public bool MoveNext()
+            {
+                if (node != null)
+                {
+                    current = node.Value;
+                    node = node.next;
+                    return true;
+                }
+                else
+                {
+                    current = default(T);
+                    return false;
+                }
+            }
+
+            public void Reset()
+            {
+                node = linkedList.head;
+                current = default(T);
+            }
+        }
     }
 }

@@ -98,6 +98,17 @@
                 Console.WriteLine(iter.Current);    // output : 1, 2, 3, 4, 5
             }
             Console.WriteLine(iter.Current);        // output : 0
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Iterator.LinkedList<int> linkedList = new Iterator.LinkedList<int>();
+            for (int i = 1; i <= 5; i++) linkedList.AddLast(i);
+
+            foreach (int i in linkedList)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }

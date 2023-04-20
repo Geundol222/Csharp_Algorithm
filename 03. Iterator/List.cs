@@ -162,10 +162,10 @@ namespace Iterator
             {
                 if (index < list.Count)
                 {
-                    current = list[index++];
-                    return true;
-                }
-                else
+                    current = list[index++];        // index가 0부터 시작하기 때문에, 인덱스값을 주고 1을 증가시키기 위해 후위증가연산자를 사용한다.
+                    return true;                    // 만약 전위중가연산자를 사용할 경우 먼저 index값이 1을 추가하고 반환하기 때문에 후위증가연산자를 사용하는 것이 적합하다.
+                }                                   // 단, 이는 current의 Default를 앞에 두느냐 뒤에 두느냐에 따라 조금 다른데, 만약 default를 배열 앞에 두는 경우
+                else                                // 
                 {
                     current = default(T);
                     return false;
