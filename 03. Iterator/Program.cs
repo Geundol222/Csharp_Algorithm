@@ -6,13 +6,15 @@
 		 * 반복기 (Enumerator(Iterator))
 		 * 
 		 * 자료구조에 저장되어 있는 요소들을 순회하는 인터페이스
+		 * 자료구조에 자료를 담는 구조는 다 다르다.
+		 * 하지만, 탐색의 경우 반복을 통해 자료구조 안의 요소들을 하나씩 돌면서 처리하는 구조일 경우,
+		 * 해당 자료구조의 내부 구조를 알지 못하더라도 반복기를 지원하기 때문에 반복기를 이용하여 자료구조 내부의 자료를 꺼내오기 수월하다.
 		 ******************************************************/
 
-
-        static void Main(string[] args)
+        void Iterator()
         {
             // 대부분의 자료구조가 반복기를 지원함
-            // 반복기를 이용한 기능을 구현할 경우, 그 기능은 대부분 자료구조를 호환할 수 있음
+            // 반복기를 이용한 기능을 구현할 경우, 그 기능은 대부분의 자료구조를 호환할 수 있음
             List<int> list = new List<int>();
             LinkedList<int> linkedList = new LinkedList<int>();
             Stack<int> stack = new Stack<int>();
@@ -35,30 +37,55 @@
             foreach (KeyValuePair<int, int> i in dic) { }
             foreach (int i in IterFunc()) { }
 
+            // 반복기 직접조작
+            List<string> strings = new List<string>();
+            for (int i = 0; i < 5; i++) strings.Add(string.Format("{0}데이터", i));
 
-            for (int i = 1; i <= 5; i++)
+            IEnumerator<string> iter = strings.GetEnumerator();
+            iter.MoveNext();
+            Console.WriteLine(iter.Current);    // output : 0데이터
+            iter.MoveNext();
+            Console.WriteLine(iter.Current);    // output : 1데이터
+
+            iter.Reset();
+            while (iter.MoveNext())
             {
-                list.Add(i);
-                linkedList.AddLast(i);
+                Console.WriteLine(iter.Current);
             }
+        }
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine(list[i]);
-            }
+        IEnumerable<int> IterFunc()
+        {
+            yield return 1;
+            yield return 2;
+            yield return 3;
+        }
 
-            // LinkedList는 인덱스의 개념이 없으므로 다음과 같이 작성하게 되면 오류 발생
-            //for (int i = 0; i < linkedList.Count; i++)
+        static void Main(string[] args)
+        {
+            //for (int i = 1; i <= 5; i++)
             //{
-                //Console.WriteLine(linkedList[i]);
+            //    list.Add(i);
+            //    linkedList.AddLast(i);
             //}
 
-            LinkedListNode<int> node = linkedList.First;
-            while (node != null)
-            {
-                Console.WriteLine(node.Value);
-                node = node.Next;
-            }
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    Console.WriteLine(list[i]);
+            //}
+
+            //LinkedList는 인덱스의 개념이 없으므로 다음과 같이 작성하게 되면 오류 발생
+            //for (int i = 0; i < linkedList.Count; i++)
+            //{
+            //    Console.WriteLine(linkedList[i]);
+            //}
+
+            //LinkedListNode<int> node = linkedList.First;
+            //while (node != null)
+            //{
+            //    Console.WriteLine(node.Value);
+            //    node = node.Next;
+            //}
         }
     }
 }
