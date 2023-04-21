@@ -38,6 +38,9 @@ namespace DataStructure
 
         public void Enqueue(T item)
         {
+            if (IsFull())
+                Grow();
+
             array[tail] = item;
             MoveNext(ref tail);
         }
@@ -49,6 +52,9 @@ namespace DataStructure
 
         public T Dequeue()
         {
+            if (IsEmpty())
+                throw new InvalidOperationException();
+
             T result = array[head];
             MoveNext(ref head);
             return result;
@@ -56,6 +62,9 @@ namespace DataStructure
 
         public T Peek()
         {
+            if (IsEmpty())
+                throw new InvalidOperationException();
+
             return array[head];
         }
 
@@ -70,6 +79,11 @@ namespace DataStructure
                 return head == tail + 1;
             else
                 return head == 0 && tail == array.Length - 1;
+        }
+
+        private void Grow()
+        {
+
         }
     }
 }
