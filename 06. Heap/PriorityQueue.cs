@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataStructure
 {
-    public class PriorityQueue
+    public class PriorityQueue<T>
     {
+
     }
 }
