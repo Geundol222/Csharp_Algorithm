@@ -36,6 +36,17 @@ namespace DataStructure
             tail = 0;
         }
 
+        public int Count
+        {
+            get
+            {
+                if (head <= tail)
+                    return tail - head;
+                else
+                    return tail - head + array.Length;
+            }
+        }
+
         public void Enqueue(T item)
         {
             if (IsFull())
@@ -83,7 +94,20 @@ namespace DataStructure
 
         private void Grow()
         {
-
+            int newCapacity = array.Length * 2;
+            T[] newArray = new T[newCapacity];
+            if (head < tail)
+            {
+                Array.Copy(array, newArray, Count);
+            }                
+            else
+            {
+                Array.Copy(array, head, newArray, 0, array.Length - head);
+                Array.Copy(array, 0, newArray, array.Length - head, tail);
+                head = 0;
+                tail = Count;
+            }
+            array = newArray;
         }
     }
 }
