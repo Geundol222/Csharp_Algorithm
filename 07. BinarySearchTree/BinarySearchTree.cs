@@ -72,6 +72,41 @@ namespace DataStructure
             }
         }
 
+        public bool TryGetValue(T item, out T outValue)
+        {
+            if (root == null)
+            {
+                outValue = default(T);
+                return false;
+            }
+
+            Node current = root;
+            while (current != null)
+            {
+                // 현재 노드의 값이 찾고자 하는 값보다 작은 경우
+                if (item.CompareTo(current.item) < 0)
+                {
+                    // 왼쪽 자식부터 다시 찾기 시작
+                    current = current.left;
+                }
+                // 현재 노드의 값이 찾고자 하는 값보다 큰 경우
+                else if (item.CompareTo(current.item) > 0)
+                {
+                    // 오른쪽 자식부터 다시 찾기 시작
+                    current = current.right;
+                }
+                // 현재 노드의 값이 찾고자 하는 값이랑 같은 경우
+                else
+                {
+                    outValue = current.item;
+                    return true;
+                }
+            }
+
+            outValue = default(T);
+            return false;
+        }
+
         public class Node
         {
             internal T item;
