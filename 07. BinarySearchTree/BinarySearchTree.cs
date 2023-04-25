@@ -72,12 +72,40 @@ namespace DataStructure
             }
         }
 
+        public bool Remove(T item)
+        {
+            Node findNode = FindNode(item);
+
+            if (findNode == null)
+                return false;
+            else
+            {
+                EraseNode(findNode);
+                return true;
+            }
+        }
+
         public bool TryGetValue(T item, out T outValue)
         {
-            if (root == null)
+            Node findNode = FindNode(item);
+
+            if (findNode == null)
             {
                 outValue = default(T);
                 return false;
+            }
+            else
+            {
+                outValue = findNode.item;
+                return true;
+            }
+        }
+
+        private Node FindNode(T item)
+        {
+            if (root == null)
+            {
+                return null;
             }
 
             Node current = root;
@@ -98,13 +126,69 @@ namespace DataStructure
                 // 현재 노드의 값이 찾고자 하는 값이랑 같은 경우
                 else
                 {
-                    outValue = current.item;
-                    return true;
+                    return current;
                 }
             }
+            return null;
+        }
 
-            outValue = default(T);
-            return false;
+        private void EraseNode(Node node)
+        {
+            // 1. 자식 노드가 없는 노드일 경우
+            if (node.HasNoChild)
+            {
+                if (node.IsLeftChild)
+                    node.parent.left = null;
+                else if (node.IsRightChild)
+                    node.parent.right = null;
+                else // if (node.isRootNode)
+                    root = null;
+            }
+            // 2. 자식 노드가 하나인 노드일 경우
+            else if (node.HasLeftChild || node.HasRightChild)
+            {
+                Node parent = node.parent;
+                Node child = node.HasLeftChild ? node.left : node.right;
+
+                if (node.IsLeftChild)
+                {
+                    parent.left = child;
+                    child.parent = parent;
+                }
+                else if (node.IsRightChild)
+                {
+                    parent.right = child;
+                    child.parent = parent;
+                }
+                else // if (node.IsRootNode)
+                {
+                    root = child;
+                    child.parent = null;
+                }
+            }
+            // 3. 자식 노드가 둘다 있는 노드일 경우
+            // 왼쪽 자식 중 가장 큰값과 데이터 교환 후, 그 노드를 삭제하는 방식으로 대체한다.
+            else // if (node.HasBothChild)
+            {
+                // 한번 왼쪽으로 간뒤 오른쪽으로 계속 이동하면서 왼쪽 자식 중 제일 큰값을 찾는다.
+                Node replaceNode = node.left;
+                while (replaceNode.right != null)
+                {
+                    replaceNode = replaceNode.right;
+                }
+                node.item = replaceNode.item;
+                EraseNode(replaceNode);
+
+                /* C#에서 쓰는 방법, 위의 결과와 동일하지만 방식의 차이만 있다.
+                Node replaceNode = node.right;
+                while (replaceNode.left != null)
+                {
+                    replaceNode = replaceNode.left;
+                }
+                node.item = replaceNode.item;
+                EraseNode(replaceNode);
+                 */
+            }
         }
 
         public class Node
@@ -121,6 +205,15 @@ namespace DataStructure
                 this.left = left;
                 this.right = right;
             }
+
+            public bool IsRootNode { get { return parent == null; } }
+            public bool IsLeftChild { get { return parent != null && parent.left == this; } }
+            public bool IsRightChild { get { return parent != null && parent.right == this; } }
+
+            public bool HasNoChild { get { return left == null && right == null; } }
+            public bool HasLeftChild { get { return left != null && right == null; } }
+            public bool HasRightChild { get { return left == null && right != null; } }
+            public bool HasBothChild { get { return left != null && right != null; } }
         }
     }
 }
