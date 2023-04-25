@@ -23,11 +23,17 @@
         //  접근		  탐색	      삽입		  삭제
         // O(log n)		O(log n)	O(log n)	O(log n)
 
-        class Monster
-        {
-            public string name;
-            public int hp;
-        }
+        // <이진탐색트리의 주의점>
+        // 이진탐색트리의 노드들이 한쪽 자식으로만 추가되는 불균형 발생 가능
+        // 이 경우 탐색영역이 절반으로 줄여지지 않기 때문에 시간복잡도 증가
+        // 이러한 현상을 막기 위해 자가균형기능을 추가한 트리의 사용이 일반적
+        // 대표적인 방식으로 Red-Black Tree, AVL Tree 등이 있음
+        // 위 방식은 불균형이 일어난 노드의 균형을 맞추기 위해 사용하는 것, 알아만 두자
+
+        // <트리기반 자료구조의 순회>
+        // 1. 전위 순회 : 노드, 왼쪽, 오른쪽 
+        // 2. 중위 순회 : 왼쪽, 노드, 오른쪽       <= 이진탐색트리의 순회 : 오름차순 정렬
+        // 3. 후위 순회 : 왼쪽, 오른쪽, 노드
 
         void BinarySearchTree()
         {
@@ -64,15 +70,30 @@
             sortedDic.Remove("리아코");
         }
 
-        // <이진탐색트리의 주의점>
-        // 이진탐색트리의 노드들이 한쪽 자식으로만 추가되는 불균형 발생 가능
-        // 이 경우 탐색영역이 절반으로 줄여지지 않기 때문에 시간복잡도 증가
-        // 이러한 현상을 막기 위해 자가균형기능을 추가한 트리의 사용이 일반적
-        // 대표적인 방식으로 Red-Black Tree, AVL Tree 등이 있음
-
         static void Main(string[] args)
         {
-            
+            DataStructure.BinarySearchTree<int> bst = new DataStructure.BinarySearchTree<int>();
+
+            bst.Add(3);
+            bst.Add(1);
+            bst.Add(5);
+            bst.Add(4);
+            bst.Add(7);
+            bst.Add(9);
+            bst.Add(8);
+            bst.Add(2);
+            bst.Add(6);
+
+            bst.Print();
+        }
+
+        class Monster
+        {
+            public string name;
+            public int hp;
+            public int mp;
+            public int ap;
+            public int dp;
         }
     }
 }

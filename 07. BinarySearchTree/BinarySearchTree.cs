@@ -191,6 +191,19 @@ namespace DataStructure
             }
         }
 
+        public void Print()
+        {
+            Print(root);
+        }
+
+        public void Print(Node node)
+        {
+            // left와 right의 순서를 바꾸면 내림차순도 가능
+            if (node.left != null) Print(node.left);
+            Console.WriteLine(node.item);
+            if (node.right != null) Print(node.right);
+        }
+
         public class Node
         {
             internal T item;
