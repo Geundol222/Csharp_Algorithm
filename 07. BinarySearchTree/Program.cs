@@ -29,7 +29,7 @@
             public int hp;
         }
 
-        void BinartSearchTree()
+        void BinarySearchTree()
         {
             // 키 == 데이터
             SortedSet<int> sortedSet = new SortedSet<int>();
