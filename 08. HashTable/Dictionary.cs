@@ -45,10 +45,10 @@ namespace DataStructure
                     if (table[index].state == Entry.State.None)
                         break;
 
-                    index = index < table.Length ? index + 1 : 0;   // 선형탐사, index * index : 제곱탐사, Math.Abs(key.GetHashCode() : 이중해싱
+                    index = ++index % table.Length;   // 선형탐사, index * index : 제곱탐사, Math.Abs(key.GetHashCode() : 이중해싱
                 }
 
-                throw new InvalidOperationException();
+                throw new KeyNotFoundException();
             }
 
             set
@@ -68,8 +68,10 @@ namespace DataStructure
                     if (table[index].state == Entry.State.None)
                         break;
 
-                    index = index < table.Length ? index + 1 : 0;   // 선형탐사, index * index : 제곱탐사, Math.Abs(key.GetHashCode() : 이중해싱
+                    index = ++index % table.Length;   // 선형탐사, index * index : 제곱탐사, Math.Abs(key.GetHashCode() : 이중해싱
                 }
+
+                throw new KeyNotFoundException();
             }
         }
 
@@ -90,18 +92,16 @@ namespace DataStructure
                 {
                     throw new ArgumentException();              // C#에서는 중복된 키값을 허용해주지 않음 예외 발생
                 }
-                index = index < table.Length ? index + 1 : 0;   // 선형탐사, index * index : 제곱탐사, Math.Abs(key.GetHashCode() : 이중해싱
-
+                index = ++index % table.Length;  // 선형탐사, index * index : 제곱탐사, Math.Abs(key.GetHashCode() : 이중해싱
             }
 
             // 3. 사용중이 아닌 index를 발견한 경우 그 위치에 저장
-            table[index].hashCode = key.GetHashCode();
             table[index].key = key;
             table[index].value = value;
             table[index].state = Entry.State.Using;
         }
 
-        public void Remove(TKey key)
+        public bool Remove(TKey key)
         {
             // 1. key를 index로 해싱
             int index = Math.Abs(key.GetHashCode() % table.Length);
@@ -112,14 +112,16 @@ namespace DataStructure
                 if (key.Equals(table[index].key))
                 {
                     table[index].state = Entry.State.Deleted;
+                    return true;
                 }
                 if (table[index].state == Entry.State.None)
                     break;
 
-                index = index < table.Length ? index + 1 : 0;
+                index = ++index % table.Length;
 
             }
-            throw new InvalidOperationException();
+
+            return false;
         }
     }
 }
