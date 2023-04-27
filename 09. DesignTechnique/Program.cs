@@ -10,9 +10,13 @@
 		 * 문제의 성질과 조건에 따라 알맞은 알고리즘 설계기법을 선택하여 사용
 		 ******************************************************/
 
+        
+
         static void Main(string[] args)
         {
+            HanoiTower hanoiTower = new HanoiTower();
 
+            hanoiTower.MainHanoi();
         }
     }
 }
