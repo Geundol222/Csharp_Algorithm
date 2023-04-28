@@ -13,13 +13,13 @@
 
         static void Main(string[] args)
         {
-            //HanoiTower hanoiTower = new HanoiTower();
+            HanoiTower hanoiTower = new HanoiTower();
 
-            //hanoiTower.MainHanoi();
+            hanoiTower.MainHanoi();
 
-            Backtracking backtracking = new Backtracking();
-            bool[,] board = new bool[8, 8];
-            backtracking.NQueen(board);
+            //Backtracking backtracking = new Backtracking();
+            //bool[,] board = new bool[8, 8];
+            //backtracking.NQueen(board);
         }
     }
 }
