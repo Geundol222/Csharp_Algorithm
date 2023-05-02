@@ -24,9 +24,10 @@ namespace _11._Searching
         // 2차원 배열을 [출발정점, 도착정점] 으로 표현       ex) [1,3] 1정점 -> 3정점
         // 장점 : 인접여부 접근이 빠름                             O(1)   => 시간복잡도
         // 단점 : 메모리 사용량이 많음                             O(n^2) => 공간복잡도
+        // => 정점의 개수가 많아져서 메모리가 부담이 될 때에는 속도를 포기하더라도 인접리스트가 좋을 수도 있음
         bool[,] matrixGraph1 = new bool[5, 5]       // 양방향 그래프
         {
-            // [0,0] [0,1] [0,2] [0,3] [0,4]
+            // [0,0] [0,1]  [0,2]  [0,3]  [0,4]
             { false,  true,  true,  true,  true },
             {  true, false,  true, false,  true },
             {  true,  true, false, false, false },
@@ -34,7 +35,7 @@ namespace _11._Searching
             {  true,  true, false,  true, false },
         };
 
-        const int INF = int.MaxValue;
+        const int INF = int.MaxValue;               // 단절되어있다는 의미로 int의 최댓값을 넣어주게 되는데 -1과 INF 둘 중 하나를 사용하게 된다. 그 중 INF가 더 많이 사용되기는 한다.
         int[,] matrixGraph2 = new int[5, 5]         // 그래프에 가중치 부여
         {
             {  0, 132, 16, INF, INF },
