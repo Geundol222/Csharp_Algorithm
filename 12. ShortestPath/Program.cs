@@ -26,6 +26,13 @@
             PrintDijkstra(distance, path);
 
             Console.WriteLine();
+
+            int[,] costTable;
+            int[,] pathTable;
+            FloydWarshall.ShortestPath(graph, out costTable, out pathTable);
+            Console.WriteLine("<Floyd-Warshall>");
+            PrintFloydWarshall(costTable, pathTable);
+
         }
 
         private static void PrintDijkstra(int[] distance, int[] path)
@@ -49,6 +56,36 @@
                     Console.WriteLine("  X ");
                 else
                     Console.WriteLine("{0,3}", path[i]);
+            }
+        }
+
+        private static void PrintFloydWarshall(int[,] costTable, int[,] pathTable)
+        {
+            Console.WriteLine("Cost table");
+            for (int y = 0; y < costTable.GetLength(0); y++)
+            {
+                for (int x = 0; x < costTable.GetLength(1); x++)
+                {
+                    if (costTable[y, x] >= INF)
+                        Console.Write("INF ");
+                    else
+                        Console.Write("{0,3} ", costTable[y, x]);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Path table");
+            for (int y = 0; y < pathTable.GetLength(0); y++)
+            {
+                for (int x = 0; x < pathTable.GetLength(1); x++)
+                {
+                    if (pathTable[y, x] < 0)
+                        Console.Write("  X ");
+                    else
+                        Console.Write("{0,3} ", pathTable[y, x]);
+                }
+                Console.WriteLine();
             }
         }
     }
