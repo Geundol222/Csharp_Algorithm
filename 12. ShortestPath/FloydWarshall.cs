@@ -14,7 +14,11 @@ namespace _12._ShortestPath
 		 * 
 		 * 모든 노드에서 출발하여 다른 노드로 가는 각각의 최단 경로를 구함
 		 * 모든 노드를 거쳐가며 최단 거리가 갱신되는 조합이 있을 경우 갱신
+		 * 상대적으로 중요도가 낮긴 함
+		 * 정점의 개수가 적은 경우에만 사용을 고려해 볼 수 있음
 		 ******************************************************/
+
+		const int INF = 99999;
 
 		public static void ShortestPath(int[,] graph, out int[,] costTable, out int[,] pathTable)
 		{
@@ -27,7 +31,7 @@ namespace _12._ShortestPath
 				for (int x = 0; x < size; x++)
 				{
 					costTable[y, x] = graph[y, x];
-					pathTable[y, x] = -1;
+					pathTable[y, x] = graph[y, x] < INF ? y : -1;
 				}
 			}
 
