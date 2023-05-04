@@ -48,7 +48,8 @@ namespace Project_TextRPG
 
         public void GameStart()
         {
-            curScene = battleScene;
+            Data.LoadLevel();
+            curScene = mapScene;
         }
 
         public void GameOver()
