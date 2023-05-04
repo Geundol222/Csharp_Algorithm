@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace Project_TextRPG
 {
-    internal class Game
+    public class Game
     {
         private bool isRunning = true;
+
+        private Scene               curScene;
+        private MainMenuScene       mainMenuScene;
+        private MapScene            mapScene;
+        private InventoryScene      inventoryScene;
+        private BattleScene         battleScene;
 
         public void Run()
         {
@@ -35,12 +41,12 @@ namespace Project_TextRPG
 
         private void Render()
         {
-
+            curScene.Render();
         }
 
         private void Update()
         {
-
+            curScene.Update();
         }
 
         private void Release()
