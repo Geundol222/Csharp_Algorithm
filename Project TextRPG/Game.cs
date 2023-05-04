@@ -56,6 +56,7 @@ namespace Project_TextRPG
 
         public void GameOver()
         {
+            Console.CursorVisible = false;
             Console.Clear();
 
             StringBuilder sb = new StringBuilder();

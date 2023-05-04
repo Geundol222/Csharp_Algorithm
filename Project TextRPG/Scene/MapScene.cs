@@ -37,6 +37,12 @@ namespace Project_TextRPG
                     Data.player.Move(Direction.Right);
                     break;
             }
+
+            // 몬스터 이동
+            foreach (Monster monster in Data.monsters)
+            {
+                monster.MoveAction();
+            }
         }
 
         private void PrintMap()
@@ -49,16 +55,23 @@ namespace Project_TextRPG
                 for (int x = 0; x < Data.map.GetLength(1); x++)
                 {
                     if (Data.map[y, x])
-                        sb.Append(' ');
+                        sb.Append('　');
                     else
-                        sb.Append('X');
+                        sb.Append('■');
                 }
                 sb.AppendLine();
             }
             Console.WriteLine(sb.ToString());
 
+            Console.ForegroundColor = ConsoleColor.Green;
+            foreach (Monster monster in Data.monsters)
+            {
+                Console.SetCursorPosition(monster.pos.x * 2, monster.pos.y);
+                Console.Write(monster.icon);
+            }
+
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(Data.player.pos.x, Data.player.pos.y);
+            Console.SetCursorPosition(Data.player.pos.x * 2, Data.player.pos.y);
             Console.Write(Data.player.icon);
         }
     }

@@ -9,11 +9,13 @@ namespace Project_TextRPG
     public static class Data
     {
         public static Player player;
+        public static List<Monster> monsters;
         public static bool[,] map;
 
         public static void Init()
         {
             player = new Player();
+            monsters = new List<Monster>();
         }
 
         public static void Release()
@@ -44,6 +46,18 @@ namespace Project_TextRPG
             };
 
             player.pos = new Position(2, 2);
+
+            Monster slime1 = new Slime();
+            slime1.pos = new Position(3, 5);
+            monsters.Add(slime1);
+
+            Monster slime2 = new Slime();
+            slime2.pos = new Position(7, 5);
+            monsters.Add(slime2);
+
+            Monster dragon = new Dragon();
+            dragon.pos = new Position(12, 12);
+            monsters.Add(dragon);
         }
     }
 }
