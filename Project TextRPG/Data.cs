@@ -8,7 +8,18 @@ namespace Project_TextRPG
 {
     public static class Data
     {
+        public static Player player;
         public static bool[,] map;
+
+        public static void Init()
+        {
+            player = new Player();
+        }
+
+        public static void Release()
+        {
+
+        }
 
         public static void LoadLevel()
         {
@@ -31,6 +42,8 @@ namespace Project_TextRPG
                 { false,  true, false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false },
                 { false, false, false, false, false, false, false, false, false, false, false, false, false, false },
             };
+
+            player.pos = new Position(2, 2);
         }
     }
 }

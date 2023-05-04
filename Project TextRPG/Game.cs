@@ -38,6 +38,8 @@ namespace Project_TextRPG
 
         private void Init()
         {
+            Data.Init();
+
             mainMenuScene = new MainMenuScene(this);
             mapScene = new MapScene(this);
             inventoryScene = new InventoryScene(this);
@@ -85,7 +87,7 @@ namespace Project_TextRPG
 
         private void Release()
         {
-
+            Data.Release();
         }
     }
 }

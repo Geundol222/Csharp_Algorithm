@@ -19,25 +19,47 @@ namespace Project_TextRPG
 
         public override void Update()
         {
-            string input = Console.ReadLine();
+            ConsoleKeyInfo input = Console.ReadKey();
+
+            // 플레이어 이동
+            switch (input.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    Data.player.Move(Direction.Up);
+                    break;
+                case ConsoleKey.DownArrow:
+                    Data.player.Move(Direction.Down);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    Data.player.Move(Direction.Left);
+                    break;
+                case ConsoleKey.RightArrow:
+                    Data.player.Move(Direction.Right);
+                    break;
+            }
         }
 
         private void PrintMap()
         {
+            Console.ForegroundColor = ConsoleColor.White;
+
             StringBuilder sb = new StringBuilder();
             for (int y = 0; y < Data.map.GetLength(0); y++)
             {
                 for (int x = 0; x < Data.map.GetLength(1); x++)
                 {
                     if (Data.map[y, x])
-                        sb.Append('　');
+                        sb.Append(' ');
                     else
-                        sb.Append('■');
+                        sb.Append('X');
                 }
                 sb.AppendLine();
             }
-
             Console.WriteLine(sb.ToString());
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(Data.player.pos.x, Data.player.pos.y);
+            Console.Write(Data.player.icon);
         }
     }
 }
