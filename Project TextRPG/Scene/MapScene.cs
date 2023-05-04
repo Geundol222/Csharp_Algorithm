@@ -10,7 +10,6 @@ namespace Project_TextRPG
     {
         public MapScene(Game game) : base(game)
         {
-
         }
 
         public override void Render()
