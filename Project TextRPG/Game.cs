@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Project_TextRPG
 {
@@ -11,6 +12,7 @@ namespace Project_TextRPG
         private bool isRunning = true;
 
         private Scene               curScene;
+        // private Dictionary<string, Scene> sceneDic;  // 씬 딕셔너리로 처리하는 방법도 있음
         private MainMenuScene       mainMenuScene;
         private MapScene            mapScene;
         private InventoryScene      inventoryScene;
@@ -36,11 +38,42 @@ namespace Project_TextRPG
 
         private void Init()
         {
+            mainMenuScene = new MainMenuScene(this);
+            mapScene = new MapScene(this);
+            inventoryScene = new InventoryScene(this);
+            battleScene = new BattleScene(this);
 
+            curScene = mainMenuScene;
+        }
+
+        public void GameStart()
+        {
+            curScene = battleScene;
+        }
+
+        public void GameOver()
+        {
+            Console.Clear();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine();
+            sb.AppendLine("  ***    *   *   * *****       ***  *   * ***** ****  ");
+            sb.AppendLine(" *      * *  ** ** *          *   * *   * *     *   * ");
+            sb.AppendLine(" * *** ***** * * * *****      *   * *   * ***** ****  ");
+            sb.AppendLine(" *   * *   * *   * *          *   *  * *  *     *  *  ");
+            sb.AppendLine("  ***  *   * *   * *****       ***    *   ***** *   * ");
+            sb.AppendLine();
+            sb.AppendLine();
+
+            Console.WriteLine(sb.ToString());
+
+            isRunning = false;
         }
 
         private void Render()
         {
+            Console.Clear();
             curScene.Render();
         }
 
