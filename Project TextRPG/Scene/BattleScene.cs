@@ -8,6 +8,8 @@ namespace Project_TextRPG
 {
     public class BattleScene : Scene
     {
+        private Monster monster;
+
         public BattleScene(Game game) : base(game)
         {
 
@@ -30,6 +32,16 @@ namespace Project_TextRPG
         {
             string input = Console.ReadLine();
             // TODO : 배틀씬 갱신 구현
+        }
+
+        public void BattleStart(Monster monster)
+        {
+            this.monster = monster;
+            Data.monsters.Remove(monster);
+
+            Console.Clear();
+            Console.WriteLine("전투 시작!!!!!");
+            Thread.Sleep(1000);
         }
     }
 }

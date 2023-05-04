@@ -75,9 +75,16 @@ namespace Project_TextRPG
             isRunning = false;
         }
 
+        public void BattleStart(Monster monster)
+        {
+            curScene = battleScene;
+            battleScene.BattleStart(monster);
+        }
+
         private void Render()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
             curScene.Render();
         }
 

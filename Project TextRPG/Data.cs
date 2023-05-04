@@ -59,5 +59,11 @@ namespace Project_TextRPG
             dragon.pos = new Position(12, 12);
             monsters.Add(dragon);
         }
+
+        public static Monster MonsterInPos(Position pos)
+        {
+            Monster monster = monsters.Find(target => target.pos.x == pos.x && target.pos.y == pos.y);
+            return monster;
+        }
     }
 }

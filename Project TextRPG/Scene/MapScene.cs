@@ -38,10 +38,26 @@ namespace Project_TextRPG
                     break;
             }
 
+            // 플레이어 몬스터 접근
+            Monster monsterInPos = Data.MonsterInPos(Data.player.pos);
+            if (monsterInPos != null)
+            {
+                // 전투시작
+                game.BattleStart(monsterInPos);
+                return;
+            }
+
             // 몬스터 이동
             foreach (Monster monster in Data.monsters)
             {
                 monster.MoveAction();
+                if (monster.pos.x == Data.player.pos.x &&
+                    monster.pos.y == Data.player.pos.y)
+                {
+                    // 전투시작
+                    game.BattleStart(monster);
+                    return;
+                }
             }
         }
 
